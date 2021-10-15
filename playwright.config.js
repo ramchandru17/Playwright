@@ -1,6 +1,6 @@
 const config = {
     use: {
-      channel: 'chrome',
+      browserName: 'chromium',
     },
   };
   
