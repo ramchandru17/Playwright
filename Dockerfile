@@ -1,21 +1,18 @@
 FROM ubuntu:focal
 
-# Install node14
-RUN apt-get update && apt-get install -y curl && \
-    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install --no-install-recommends nodejs
-
-RUN npm install -g npm@8.1.0
-
-# === BAKE BROWSERS INTO IMAGE ===
+# Set Environment variables
 ENV PLAYWRIGHT_BROWSERS_PATH=/playwright
-
-RUN mkdir /playwright
 
 WORKDIR /playwright
 
-COPY . ./
+# Install node16
+RUN apt-get update && apt-get install -y curl && \
+    curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install --no-install-recommends nodejs && \
+    npm install -g npm@8.1.0 && \
+    npm i -D @playwright/test && \
+    npx playwright install chromium && \
+    npx playwright install-deps chromium && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN npm install && \
-    npx playwright install chromium &&\
-    npx playwright install-deps chromium
+COPY . ./

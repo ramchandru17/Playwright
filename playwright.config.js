@@ -1,7 +1,7 @@
 const config = {
-    use: {
-      browserName: 'chromium',
-    },
+    use:{
+      browserType:'chromium',
+    }
   };
   
   module.exports = config;
