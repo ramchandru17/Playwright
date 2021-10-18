@@ -91,4 +91,6 @@ test('test', async ({ page }) => {
   await page.click('[data-test="back-to-products"]');
   await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
 
+  // End
+
 });
